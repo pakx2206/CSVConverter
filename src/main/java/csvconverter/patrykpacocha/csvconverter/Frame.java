@@ -5,8 +5,15 @@
 package csvconverter.patrykpacocha.csvconverter;
 
 import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
-import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.*;
+
+import static javax.swing.JFileChooser.DIRECTORIES_ONLY;
+
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -17,8 +24,10 @@ public class Frame extends javax.swing.JFrame {
     /**
      * Creates new form Frame
      */
+    public String csvName;
     public Frame() {
-        initComponents();
+        
+	    initComponents();
         
         //  setting text of the left menu label
         jLabel2.setText("CSV");
@@ -29,13 +38,12 @@ public class Frame extends javax.swing.JFrame {
         
         // placeholder settings
         jTextField3.setForeground(new Color(204, 204, 204));
-        jTextField3.setText("  wpisz pola, które ma zawierać nowy plik, np. 1,2,59");
-        
-
-        
-        
+        jTextField3.setText("wpisz pola, które ma zawierać nowy plik, np. 1,2,59");
         
     }
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +139,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14)); // NOI18N
         jLabel7.setText("Miejsca wybranych pól");
 
+        jTextField3.setMargin(new Insets(50,50,50,50));
         jTextField3.setBackground(new java.awt.Color(102, 102, 102));
         jTextField3.setForeground(new java.awt.Color(204, 204, 204));
         jTextField3.setToolTipText("");
@@ -176,7 +185,11 @@ public class Frame extends javax.swing.JFrame {
         jButton1.setText("KONWERTUJ");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+	            try {
+		            jButton1MouseClicked(evt);
+	            } catch (IOException e) {
+		            throw new RuntimeException(e);
+	            }
             }
         });
 
@@ -240,21 +253,21 @@ public class Frame extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField2))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField4))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +333,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
         // placeholder setup
-        String placeholder = "  wpisz pola, które ma zawierać nowy plik, np. 1,2,59";
+        String placeholder = "wpisz pola, które ma zawierać nowy plik, np. 1,2,59";
         if (jTextField3.getText().equals(placeholder)) {
                     jTextField3.setText("");
                     jTextField3.setForeground(new Color(204,204,204)); // Zmień kolor tekstu na czarny
@@ -329,7 +342,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
         // placeholder setup continuation
-        String placeholder = "  wpisz pola, które ma zawierać nowy plik, np. 1,2,59";
+        String placeholder = "wpisz pola, które ma zawierać nowy plik, np. 1,2,59";
         if (jTextField3.getText().isEmpty()) {
             jTextField3.setForeground(new Color(204, 204, 204));
             jTextField3.setText(placeholder); 
@@ -340,11 +353,11 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton1MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jButton1MouseClicked(MouseEvent evt) throws IOException {//GEN-FIRST:event_jButton1MouseClicked
         // todo - add all validation method like last cannot be the coma 
         if(checkbox1.getState() == false){
-            // todo - add alert box "zaakceptuj formularz"
-            JOptionPane.showMessageDialog(this, "Zaakceptuj formularz!", "UWAGA!", JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "Zaakceptuj formularz!", "UWAGA!", JOptionPane.ERROR_MESSAGE);
             return;
         }
         // checking the jTextField3 if there is any other char than <0,9> or ","
@@ -359,16 +372,21 @@ public class Frame extends javax.swing.JFrame {
             }
             
             if(pointer == 0){
-                // todo - add alert box "Proszę wpisać pola wg podanego opisu"
-                        JOptionPane.showMessageDialog(this, "Proszę wpisać numery pól odpowiednio", "UWAGA!", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Proszę wpisać numery pól odpowiednio", "UWAGA!", JOptionPane.ERROR_MESSAGE);
                         return;
             }
             if(pointer > 0){
                 continue;
             }
+            String placeholder = "wpisz pola, które ma zawierać nowy plik, np. 1,2,59";
+                if(jTextField3.getText().equals(placeholder)){
+                    JOptionPane.showMessageDialog(this, "Proszę uzupełnić numery pól", "UWAGA!", JOptionPane.ERROR_MESSAGE);
+
+            }
         }
-        JOptionPane.showMessageDialog(this, "Wszystko jest w porządku! Możesz kontynuować.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
-        return ;
+        Converter converter = new Converter(Runtime.getRuntime().availableProcessors(),jTextField4.getText(),jTextField2.getText(),jTextField3.getText(), csvName);
+
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
@@ -380,11 +398,25 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser chooser2 = new JFileChooser();
+        chooser2.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser2.showOpenDialog(null);
+        
+        File csvAfterConvertion = chooser2.getSelectedFile();
+        String csvAfterConvertionPath = csvAfterConvertion.getAbsolutePath();
+        jTextField2.setText(csvAfterConvertionPath);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser chooser1 = new JFileChooser();
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter("plik CSV","*.csv", "csv");
+        chooser1.setFileFilter(filter1);
+        chooser1.showOpenDialog(null);
+        File csvBeforeConvertion = chooser1.getSelectedFile();
+        String csvBeforeConvertionPath = csvBeforeConvertion.getAbsolutePath();
+        jTextField4.setText(csvBeforeConvertionPath);
+        csvName = csvBeforeConvertion.getName();
+        csvName.replace(".csv","");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked

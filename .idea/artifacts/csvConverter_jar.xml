@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="csvConverter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/csvConverter_jar</output-path>
+    <root id="archive" name="csvConverter.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="csvConverter" />
+      <element id="library" level="project" name="Maven: org.pushing-pixels:substance:6.3" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/2.0/flatlaf-2.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
