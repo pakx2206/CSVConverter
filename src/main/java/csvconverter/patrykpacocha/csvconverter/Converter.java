@@ -44,13 +44,16 @@ public class Converter extends Component {
 		ArrayList<String> linesFormatted = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(csvBeforePath))) {
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				String finalLine = line;
 				pool.submit(() -> {
-					String[] lineSplit = finalLine.split(";");
+					String[] lineSplit = finalLine.split("\";");
 					StringBuilder sb = new StringBuilder();
 					for (int i : selected) {
-						sb.append(lineSplit[i-1]).append(";");
+
+						sb.append(lineSplit[i-1]).append("\";");
+
 					}
 					sb.append("\n");
 					String output = sb.toString();

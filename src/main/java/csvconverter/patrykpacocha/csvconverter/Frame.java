@@ -416,7 +416,7 @@ public class Frame extends javax.swing.JFrame {
         String csvBeforeConvertionPath = csvBeforeConvertion.getAbsolutePath();
         jTextField4.setText(csvBeforeConvertionPath);
         csvName = csvBeforeConvertion.getName();
-        csvName.replace(".csv","");
+        csvName = csvName.replace(".csv","");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
