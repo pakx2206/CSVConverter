@@ -46,16 +46,17 @@ public class Converter extends Component {
 			String line;
 
 			while ((line = reader.readLine()) != null) {
-				String finalLine = line;
+				String finalLine = line + ";";
 				pool.submit(() -> {
 					String[] lineSplit = finalLine.split("\";");
 					StringBuilder sb = new StringBuilder();
+					
 					for (int i : selected) {
 
 						sb.append(lineSplit[i-1]).append("\";");
 
 					}
-					sb.append("\n");
+					sb.delete(sb.length()-1,sb.length()).append("\n");
 					String output = sb.toString();
 					linesFormatted.add(output);
 				});
@@ -65,6 +66,7 @@ public class Converter extends Component {
 		}
 		pool.shutdown();
 		while (!pool.isTerminated()) {}
+
 		File file = new File(csvAfterPath, csvName + "-CONVERTED.csv");
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			for (String line : linesFormatted) {
